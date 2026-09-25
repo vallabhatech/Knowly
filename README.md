@@ -127,3 +127,206 @@ docker compose down -v            # tear down + wipe volumes
 ```
 
 Migrations run automatically on each `server` container boot.
+
+
+## Project overview
+
+Knowly turns uploaded study material into a structured learning workspace: students can capture a PDF, generate a study guide and quiz, save the result in a personal library, review attempts, and ask Sage for contextual help.
+
+### Core workflow
+
+~~~text
+Capture → Extract → Understand → Practice → Review → Ask
+~~~
+
+### Main capabilities
+
+- PDF upload and text extraction
+- Structured study-guide generation
+- Quiz generation with explanations
+- Quiz attempt submission and review
+- Session-scoped document library
+- Sage contextual tutor chat
+- Anonymous signed sessions
+- Optional Google OAuth authentication
+- PostgreSQL persistence
+- S3-compatible source-document storage
+- OpenAPI-generated TypeScript API types
+- Fixture-backed development/testing path that does not require a live AI key
+
+## Architecture at a glance
+
+~~~text
+React + TypeScript + Vite
+          │
+          │ HTTP / JSON / multipart
+          ▼
+       FastAPI
+    ┌─────┼──────────┐
+    ▼     ▼          ▼
+Documents Attempts   Auth / Chat
+    │     │          │
+    └─────┴──────┬───┘
+                 ▼
+            PostgreSQL
+                 │
+          ┌──────┴──────┐
+          ▼             ▼
+    Object Storage    Gemini / AI
+~~~
+
+Detailed design: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)
+
+## Technology stack
+
+| Area | Technology |
+|---|---|
+| Client | React 18, TypeScript, Vite |
+| Client data | TanStack Query |
+| Client state | Zustand |
+| Backend | FastAPI, Python 3.12+ |
+| Database | PostgreSQL 16 |
+| ORM | SQLModel / SQLAlchemy |
+| Migrations | Alembic |
+| AI | Google Gemini via google-genai |
+| PDF | pypdf + PyMuPDF |
+| Storage | S3-compatible storage via aioboto3 |
+| Auth | Signed anonymous sessions + Google OAuth |
+| Testing | pytest + pytest-asyncio |
+| Containers | Docker Compose |
+
+## Repository map
+
+~~~text
+client/                  React application
+server/app/core/        configuration, errors, logging
+server/app/models/      database models
+server/app/routers/     HTTP routes
+server/app/schemas/     request/response contracts
+server/app/services/    AI, PDF, storage and domain services
+server/tests/           backend tests and fixtures
+docs/                    submission and engineering documentation
+~~~
+
+## Windows setup
+
+### Prerequisites
+
+Install Git, Python 3.12+, Node.js 20+, npm, and either PostgreSQL 16+ or Docker Desktop.
+
+### Start PostgreSQL with Docker
+
+~~~bat
+docker run -d --name knowly-postgres ^
+  -e POSTGRES_PASSWORD=postgres ^
+  -e POSTGRES_DB=snapstudy ^
+  -p 5432:5432 postgres:16
+~~~
+
+### Start the API
+
+~~~bat
+cd server
+python -m venv .venv
+.venv\\Scripts\\activate
+pip install -e ".[dev]"
+copy .env.example .env
+alembic upgrade head
+uvicorn app.main:app --reload --port 8000
+~~~
+
+API resources: http://localhost:8000/docs, http://localhost:8000/openapi.json and http://localhost:8000/health
+
+### Start the client
+
+~~~bat
+cd client
+npm install
+npm run gen:api
+npm run dev
+~~~
+
+Open http://localhost:5173.
+
+## Testing and quality gates
+
+The backend test suite covers health, signed session cookies, processing, fixture-backed AI output, persistence, duplicate uploads, signed download URLs, ownership isolation, soft deletion, rate limits, validation failures, authentication, storage and database behavior.
+
+~~~bat
+cd server
+pytest
+ruff check .
+mypy app
+~~~
+
+Client checks:
+
+~~~bat
+cd client
+npm run lint
+npx tsc -b
+npm run build
+~~~
+
+A new submission should not be described as verified until these checks have actually been run in the target environment.
+
+## API contract generation
+
+The frontend types are generated from the running FastAPI OpenAPI document:
+
+~~~bat
+cd client
+npm run gen:api
+~~~
+
+The generated contract is client/src/lib/api-types.ts. Restart the API after response-model changes before regenerating it.
+
+Endpoint reference: [docs/API.md](docs/API.md)
+
+## Docker verification
+
+~~~bat
+docker compose up --build
+~~~
+
+The production-like local stack exposes the client on port 8080 and the API on port 8000. The development compose override provides hot reload.
+
+~~~bat
+docker compose -f docker-compose.yml -f docker-compose.dev.yml up
+docker compose down
+~~~
+
+## Configuration
+
+Use server/.env.example as the source of truth for local configuration. Important variables include DATABASE_URL, GEMINI_API_KEY, STORAGE_BUCKET, STORAGE_ENDPOINT, STORAGE_ACCESS_KEY, STORAGE_SECRET_KEY, COOKIE_SECRET, GOOGLE_OAUTH_CLIENT_ID, GOOGLE_OAUTH_CLIENT_SECRET, OAUTH_REDIRECT_URL, SESSION_SECRET, CORS_ORIGINS and ENV.
+
+Never commit real credentials.
+
+## Security notes
+
+Knowly uses signed session identifiers, HTTP-only/same-site cookie protections, user-scoped document queries, ownership checks, soft deletion, environment-based secrets, CORS controls and structured API errors. Upstream AI rate-limit handling is also implemented.
+
+For production use, add TLS, managed secrets, restricted CORS, hardened cookie settings, backups, observability and infrastructure-level access controls.
+
+## Submission checklist
+
+- [ ] README and docs reviewed
+- [ ] No secrets committed
+- [ ] Migrations apply cleanly
+- [ ] Backend tests pass
+- [ ] Ruff and mypy pass
+- [ ] Client lint/typecheck/build pass
+- [ ] Upload → study guide → quiz flow verified
+- [ ] Library and ownership behavior verified
+- [ ] Quiz attempt/results flow verified
+- [ ] Sage verified when AI credentials are available
+- [ ] Docker smoke test completed
+- [ ] Screenshots/demo assets prepared
+
+## Documentation
+
+- [Architecture](docs/ARCHITECTURE.md)
+- [API reference](docs/API.md)
+- [Development and troubleshooting](docs/DEVELOPMENT.md)
+- [Submission guide](docs/SUBMISSION.md)
+- [Original product requirements](PRP.md)
