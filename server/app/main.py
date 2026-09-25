@@ -63,7 +63,7 @@ def _error_response(
 
 def create_app() -> FastAPI:
     settings = get_settings()
-    app = FastAPI(title="SnapStudy API", version="0.1.0", lifespan=lifespan)
+    app = FastAPI(title="Knowly API", version="0.1.0", lifespan=lifespan)
 
     app.add_middleware(
         CORSMiddleware,
