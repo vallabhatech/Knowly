@@ -12,9 +12,9 @@ export default function LandingPage() {
     <div className="landing-page">
       <header className="landing-nav">
         <div className="landing-nav-inner">
-          <button className="landing-brand" onClick={() => navigate('/')} aria-label="PocketGuru home">
+          <button className="landing-brand" onClick={() => navigate('/')} aria-label="Knowly home">
             <Sage pose="wave" size={42} animated={false} />
-            <span>PocketGuru</span>
+            <span>Knowly</span>
           </button>
           <nav className="landing-links" aria-label="Landing navigation">
             <a href="#features">Features</a>
@@ -119,7 +119,7 @@ export default function LandingPage() {
           <div>
             <div className="landing-footer-brand">
               <Sage pose="wave" size={36} animated={false} />
-              <span>PocketGuru</span>
+              <span>Knowly</span>
             </div>
             <p>Study guides and quizzes from your camera. Built by students, for students.</p>
           </div>
