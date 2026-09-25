@@ -1,0 +1,63 @@
+name: Client API Types
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  api-types:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+          cache-dependency-path: client/package-lock.json
+
+      - name: Install server dependencies
+        run: python -m pip install -e server
+
+      - name: Install client dependencies
+        working-directory: client
+        run: npm ci
+
+      - name: Start API
+        working-directory: server
+        env:
+          DATABASE_URL: postgresql+asyncpg://postgres:postgres@localhost:5432/snapstudy
+          GEMINI_API_KEY: test
+          STORAGE_BUCKET: snapstudy-docs
+          STORAGE_ENDPOINT: https://example.invalid
+          STORAGE_ACCESS_KEY: test
+          STORAGE_SECRET_KEY: test
+          COOKIE_SECRET: test
+          CORS_ORIGINS: http://localhost:5173
+          ENV: test
+        run: |
+          nohup python -m uvicorn app.main:app --host 127.0.0.1 --port 8000 >/tmp/snapstudy-api.log 2>&1 &
+          for attempt in $(seq 1 20); do
+            if curl -fsS http://127.0.0.1:8000/openapi.json >/dev/null; then
+              exit 0
+            fi
+            sleep 1
+          done
+          cat /tmp/snapstudy-api.log
+          exit 1
+
+      - name: Verify generated API types
+        working-directory: client
+        run: |
+          npm run gen:api
+          git diff --exit-code src/lib/api-types.ts

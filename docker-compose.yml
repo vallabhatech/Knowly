@@ -1,0 +1,53 @@
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: snapstudy
+      POSTGRES_PASSWORD: snapstudy
+      POSTGRES_DB: snapstudy
+    ports:
+      - "5433:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U snapstudy"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  server:
+    build:
+      context: ./server
+    environment:
+      DATABASE_URL: postgresql+asyncpg://snapstudy:snapstudy@db:5432/snapstudy
+      GEMINI_API_KEY: ${GEMINI_API_KEY:-}
+      STORAGE_BUCKET: ${STORAGE_BUCKET:-snapstudy-docs}
+      STORAGE_ENDPOINT: ${STORAGE_ENDPOINT:-}
+      STORAGE_ACCESS_KEY: ${STORAGE_ACCESS_KEY:-}
+      STORAGE_SECRET_KEY: ${STORAGE_SECRET_KEY:-}
+      COOKIE_SECRET: ${COOKIE_SECRET:-dev-secret-change-me}
+      GOOGLE_OAUTH_CLIENT_ID: ${GOOGLE_OAUTH_CLIENT_ID:-}
+      GOOGLE_OAUTH_CLIENT_SECRET: ${GOOGLE_OAUTH_CLIENT_SECRET:-}
+      OAUTH_REDIRECT_URL: ${OAUTH_REDIRECT_URL:-http://localhost:8000/api/auth/callback/google}
+      SESSION_SECRET: ${SESSION_SECRET:-dev-session-secret-change-me}
+      CORS_ORIGINS: http://localhost:5173,http://localhost:8080
+      ENV: development
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "8000:8000"
+    command: >
+      sh -c "alembic upgrade head &&
+             gunicorn -k uvicorn.workers.UvicornWorker -w 2 -b 0.0.0.0:8000 app.main:app"
+
+  client:
+    build:
+      context: ./client
+    depends_on:
+      - server
+    ports:
+      - "8080:80"
+
+volumes:
+  pgdata:

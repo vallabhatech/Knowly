@@ -1,0 +1,23 @@
+.DS_Store
+.idea/
+.vscode/
+.claude/
+.env
+*.env.local
+
+# Dependencies and build outputs
+node_modules/
+dist/
+*.tsbuildinfo
+
+# Python artifacts
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.venv/
+venv/
+
+# Ignore markdown docs except README files
+*.md
+!README.md

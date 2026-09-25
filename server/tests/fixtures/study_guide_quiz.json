@@ -1,0 +1,134 @@
+{
+  "study_guide": {
+    "title": "Photosynthesis: The Engine of Plant Life",
+    "summary": "Photosynthesis is the process by which green plants, algae, and some bacteria convert light energy into chemical energy stored as glucose. It happens primarily in the chloroplasts of leaf cells and produces oxygen as a byproduct. The overall reaction combines six molecules of carbon dioxide with six of water, using light, to yield one glucose molecule and six oxygen molecules. Photosynthesis is split into the light-dependent reactions (in the thylakoid membranes) and the Calvin cycle (in the stroma).",
+    "key_concepts": [
+      {
+        "term": "Chloroplast",
+        "definition": "The organelle inside plant cells where photosynthesis occurs; contains chlorophyll and is bounded by a double membrane.",
+        "related_terms": ["Thylakoid", "Stroma", "Chlorophyll"]
+      },
+      {
+        "term": "Chlorophyll",
+        "definition": "The green pigment in chloroplasts that absorbs light energy, primarily in red and blue wavelengths.",
+        "related_terms": ["Pigment", "Photosystem"]
+      },
+      {
+        "term": "Light-Dependent Reactions",
+        "definition": "The first stage of photosynthesis, occurring in the thylakoid membranes, where light energy is captured and used to produce ATP and NADPH while splitting water and releasing oxygen.",
+        "related_terms": ["Thylakoid", "Photosystem II", "ATP", "NADPH"]
+      },
+      {
+        "term": "Calvin Cycle",
+        "definition": "The light-independent stage of photosynthesis in the stroma; uses ATP and NADPH to fix CO2 into glucose via the enzyme RuBisCO.",
+        "related_terms": ["Stroma", "RuBisCO", "Carbon fixation"]
+      },
+      {
+        "term": "RuBisCO",
+        "definition": "The enzyme that catalyzes carbon fixation in the Calvin cycle; the most abundant enzyme on Earth.",
+        "related_terms": ["Calvin Cycle", "Carbon fixation"]
+      },
+      {
+        "term": "Stomata",
+        "definition": "Tiny pores on the underside of leaves that allow CO2 in and O2/water vapor out.",
+        "related_terms": ["Guard cells", "Gas exchange"]
+      }
+    ],
+    "flashcards": [
+      { "front": "Where in the plant cell does photosynthesis occur?", "back": "In the chloroplasts." },
+      { "front": "What are the two stages of photosynthesis?", "back": "The light-dependent reactions and the Calvin cycle." },
+      { "front": "What pigment absorbs light for photosynthesis?", "back": "Chlorophyll, mainly in red and blue wavelengths." },
+      { "front": "What gas do plants release during photosynthesis?", "back": "Oxygen (O2)." },
+      { "front": "What gas do plants take in for photosynthesis?", "back": "Carbon dioxide (CO2)." },
+      { "front": "What is the overall equation for photosynthesis?", "back": "6 CO2 + 6 H2O + light \u2192 C6H12O6 + 6 O2." },
+      { "front": "Where do the light-dependent reactions occur?", "back": "In the thylakoid membranes of the chloroplast." },
+      { "front": "Where does the Calvin cycle occur?", "back": "In the stroma of the chloroplast." },
+      { "front": "What enzyme fixes carbon in the Calvin cycle?", "back": "RuBisCO." },
+      { "front": "What two energy carriers does the light stage produce?", "back": "ATP and NADPH." }
+    ]
+  },
+  "quiz": {
+    "questions": [
+      {
+        "prompt": "Which organelle is the primary site of photosynthesis in plant cells?",
+        "options": ["Mitochondrion", "Chloroplast", "Nucleus", "Ribosome"],
+        "correct_index": 1,
+        "explanation": "Chloroplasts contain chlorophyll and are the dedicated organelle for photosynthesis in plant cells.",
+        "source_quote": "Photosynthesis happens primarily in the chloroplasts of leaf cells."
+      },
+      {
+        "prompt": "What pigment absorbs light energy for photosynthesis?",
+        "options": ["Hemoglobin", "Melanin", "Chlorophyll", "Carotene"],
+        "correct_index": 2,
+        "explanation": "Chlorophyll, the green pigment in chloroplasts, absorbs primarily red and blue wavelengths.",
+        "source_quote": "The green pigment in chloroplasts that absorbs light energy."
+      },
+      {
+        "prompt": "Which gas is released as a byproduct of photosynthesis?",
+        "options": ["Carbon dioxide", "Nitrogen", "Hydrogen", "Oxygen"],
+        "correct_index": 3,
+        "explanation": "Water is split during the light reactions, releasing molecular oxygen.",
+        "source_quote": "produces oxygen as a byproduct."
+      },
+      {
+        "prompt": "Where do the light-dependent reactions take place?",
+        "options": ["Stroma", "Cytoplasm", "Thylakoid membranes", "Mitochondrial matrix"],
+        "correct_index": 2,
+        "explanation": "The light reactions occur in the thylakoid membranes, where the photosystems are embedded.",
+        "source_quote": "the light-dependent reactions (in the thylakoid membranes)"
+      },
+      {
+        "prompt": "Where does the Calvin cycle occur?",
+        "options": ["Stroma", "Thylakoid lumen", "Outer membrane", "Cell wall"],
+        "correct_index": 0,
+        "explanation": "The Calvin cycle takes place in the stroma, the fluid surrounding the thylakoids.",
+        "source_quote": "the Calvin cycle (in the stroma)"
+      },
+      {
+        "prompt": "Which enzyme catalyzes carbon fixation in the Calvin cycle?",
+        "options": ["ATP synthase", "RuBisCO", "DNA polymerase", "Helicase"],
+        "correct_index": 1,
+        "explanation": "RuBisCO fixes CO2 onto RuBP to begin the Calvin cycle.",
+        "source_quote": "uses ATP and NADPH to fix CO2 into glucose via the enzyme RuBisCO."
+      },
+      {
+        "prompt": "Which two molecules carry energy from the light reactions to the Calvin cycle?",
+        "options": ["ADP and NAD+", "ATP and NADPH", "Glucose and O2", "CO2 and H2O"],
+        "correct_index": 1,
+        "explanation": "The light reactions produce ATP and NADPH, which power the Calvin cycle.",
+        "source_quote": "used to produce ATP and NADPH while splitting water and releasing oxygen."
+      },
+      {
+        "prompt": "What is the balanced overall equation for photosynthesis?",
+        "options": [
+          "C6H12O6 + 6 O2 \u2192 6 CO2 + 6 H2O",
+          "6 CO2 + 6 H2O \u2192 C6H12O6 + 6 O2",
+          "6 O2 + glucose \u2192 6 CO2",
+          "CO2 + light \u2192 O2"
+        ],
+        "correct_index": 1,
+        "explanation": "Six carbon dioxide and six water, with light, yield one glucose and six oxygen.",
+        "source_quote": "combines six molecules of carbon dioxide with six of water, using light, to yield one glucose molecule and six oxygen molecules."
+      },
+      {
+        "prompt": "Which leaf structures regulate gas exchange for photosynthesis?",
+        "options": ["Stomata", "Veins", "Cuticle", "Trichomes"],
+        "correct_index": 0,
+        "explanation": "Stomata are pores that allow CO2 in and O2/water vapor out.",
+        "source_quote": "Tiny pores on the underside of leaves that allow CO2 in and O2/water vapor out."
+      },
+      {
+        "prompt": "Why is RuBisCO described as the most abundant enzyme on Earth?",
+        "options": [
+          "It exists in every animal cell",
+          "It catalyzes carbon fixation in nearly all photosynthetic organisms",
+          "It powers respiration",
+          "It builds DNA"
+        ],
+        "correct_index": 1,
+        "explanation": "Because photosynthesis is so widespread, RuBisCO is present in vast quantities globally.",
+        "source_quote": "the most abundant enzyme on Earth."
+      }
+    ]
+  }
+}
