@@ -4,7 +4,7 @@ import { Icon } from './icons';
 import { PGButton } from './primitives';
 import type { MeResponse } from '../lib/queries';
 
-const DISMISS_KEY = 'pocketguru-auth-nudge-dismissed-until';
+const DISMISS_KEY = 'knowly-auth-nudge-dismissed-until';
 const DISMISS_MS = 7 * 24 * 60 * 60 * 1000;
 
 export function AuthNudge({ me, show }: { me: MeResponse | undefined; show: boolean }) {
