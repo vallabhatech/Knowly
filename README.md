@@ -1,4 +1,4 @@
-# SnapStudy / PocketGuru
+# Knowly
 
 Photo-to-study-guide-and-quiz app. See `PRP.md` for the full spec.
 
