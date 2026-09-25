@@ -60,7 +60,7 @@ export default function LoginPage() {
 
       <div className="no-scrollbar" style={{ flex: 1, overflowY: 'auto', padding: '22px 22px 28px' }}>
         <div style={{ textAlign: 'center', marginBottom: 22 }}>
-          <h1 className="t-display" style={{ margin: '0 0 6px', fontSize: 28 }}>Sign in to PocketGuru</h1>
+          <h1 className="t-display" style={{ margin: '0 0 6px', fontSize: 28 }}>Sign in to Knowly</h1>
           <div className="t-body-sm" style={{ color: 'var(--ink-3)' }}>
             Keep every guide synced to your Google account.
           </div>
@@ -105,7 +105,7 @@ export default function LoginPage() {
             onClick={() => navigate('/')}
             style={{ background: 'transparent', border: 0, color: 'var(--green-dark)', fontWeight: 900, cursor: 'pointer', fontSize: 13, textTransform: 'uppercase', letterSpacing: '0.04em' }}
           >
-            See how PocketGuru works
+            See how Knowly works
           </button>
         </div>
       </div>
