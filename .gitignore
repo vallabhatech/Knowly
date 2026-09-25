@@ -18,6 +18,9 @@ __pycache__/
 .venv/
 venv/
 
-# Ignore markdown docs except README files
+# Ignore generated markdown by default, but keep project documentation tracked
 *.md
 !README.md
+!docs/
+!docs/*.md
+!PRP.md
