@@ -162,7 +162,7 @@ export default function CapturePage() {
         left={<SettingsMenu />}
         title={
           <span style={{ display: 'inline-flex', alignItems: 'center', gap: 8 }}>
-            <SageBadge size={28} /> PocketGuru
+            <SageBadge size={28} /> Knowly
           </span>
         }
         right={<AuthNav />}
